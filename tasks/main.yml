@@ -1,0 +1,17 @@
+---
+
+- name: configure credentials
+  tower_credential:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    organization: "{{ item.organization }}"
+    state: "{{ item.state }}"
+    password: "{{ item.password }}"
+    kind: "{{ item.kind }}"
+    tower_username: "{{ awx_username }}"
+    tower_password: "{{ awx_new_password }}"
+    tower_verify_ssl: "{{ awx_verify_ssl }}"
+    tower_host: "{{ awx_host }}"
+  register: awx_credentials
+  ignore_errors: yes
+  with_items: "{{ awx_credentials }}"

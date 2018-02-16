@@ -1,0 +1,10 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: tonyskidmore
+  description: "configures awx after deployment"
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+    - name: EL
