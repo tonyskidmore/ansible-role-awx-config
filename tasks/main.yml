@@ -44,6 +44,23 @@
   with_items:
     - "{{ awx_projects }}"
 
+- name: create inventories using tower-cli
+  shell: "{{ lookup('template', 'awx-inventory.j2') }}"
+  # no_log: yes
+  register: awx_inv_shell
+  ignore_errors: yes
+  # with_items: "{{ awx_projects }}"
+  with_items:
+    - "{{ awx_inventories }}"
+
+- name: create hostss using tower-cli
+  shell: "{{ lookup('template', 'awx-host.j2') }}"
+  # no_log: yes
+  register: awx_host_shell
+  ignore_errors: yes
+  # with_items: "{{ awx_projects }}"
+  with_items:
+    - "{{ awx_hosts }}"
 
 
 - name: debug results
@@ -54,4 +71,6 @@
     - "{{ awx_credential_shell }}"
     - "{{ awx_project_shell }}"
     - "{{ awx_user_shell }}"
+    - "{{ awx_inv_shell }}"
+    - "{{ awx_host_shell }}"
 

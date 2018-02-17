@@ -9,3 +9,7 @@ awx_projects:
   - { name: 'ansibledemoproject', description: 'Ansible demo project', organization: 'Default', scm_type: 'git', sc_url: 'https://github.com/tonyskidmore/ansible-demo-user.git', options: '--wait' }
 awx_users:
   - { username: 'demorestuser', password: 'D0ntPutH3r3', email: 'demorestuser@demo.local', options: '--is-superuser true' }
+awx_inventories:
+  - { name: 'ansibledemoinventory', organization: 'Default', options: '' }
+awx_hosts:
+  - { name: 'jumphost', inventory: 'ansibledemoinventory', options: '' }

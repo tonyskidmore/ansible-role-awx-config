@@ -1,0 +1,3 @@
+{% if item is defined%}
+tower-cli inventory create -h {{ awx_host }} -u {{  awx_username }} -p {{ awx_password }} --name {{ item.name }} --organization {{ item.organization }} {{ item.options }}
+{% endif %}
