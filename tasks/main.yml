@@ -22,12 +22,36 @@
   shell: 'tower-cli config verify_ssl false'
 
 - name: create credentials using tower-cli
-  shell: "{{ lookup('template', 'awx_credential.j2') }}"
-  no_log: yes
+  shell: "{{ lookup('template', 'awx-credential.j2') }}"
+  # no_log: yes
   register: awx_credential_shell
   ignore_errors: yes
   with_items: "{{ awx_credentials }}"
 
-- name: debug awx_create_credentials
+- name: create users using tower-cli
+  shell: "{{ lookup('template', 'awx-user.j2') }}"
+  # no_log: yes
+  register: awx_user_shell
+  ignore_errors: yes
+  with_items: "{{ awx_users }}"
+
+- name: create projects using tower-cli
+  shell: "{{ lookup('template', 'awx-project.j2') }}"
+  # no_log: yes
+  register: awx_project_shell
+  ignore_errors: yes
+  # with_items: "{{ awx_projects }}"
+  with_items:
+    - "{{ awx_projects }}"
+
+
+
+- name: debug results
   debug:
-    var: awx_credential_shell
+    var: item
+  ignore_errors: yes
+  with_items:
+    - "{{ awx_credential_shell }}"
+    - "{{ awx_project_shell }}"
+    - "{{ awx_user_shell }}"
+
