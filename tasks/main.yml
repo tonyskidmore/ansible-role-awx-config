@@ -9,7 +9,7 @@
     password: "{{ item.password }}"
     kind: "{{ item.kind }}"
     tower_username: "{{ awx_username }}"
-    tower_password: "{{ awx_new_password }}"
+    tower_password: "{{ awx_password }}"
     tower_verify_ssl: "{{ awx_verify_ssl }}"
     tower_host: "{{ awx_host }}"
   register: awx_credentials
