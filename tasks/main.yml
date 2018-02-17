@@ -1,5 +1,11 @@
 ---
 
+- name: debug vars
+  debug:
+    var: item.type
+  with_items:
+    - "{{ awx_credentials }}"
+
 - name: configure credentials
   tower_credential:
     name: "{{ item.name }}"
@@ -7,26 +13,27 @@
     organization: "{{ item.organization }}"
     state: "{{ item.state }}"
     password: "{{ item.password }}"
-    kind: 'Machine'
+    kind: "{{ item.type }}"
     # "{{ item.kind }}"
     tower_username: "{{ awx_username }}"
     tower_password: "{{ awx_password }}"
     tower_verify_ssl: "{{ awx_verify_ssl }}"
     tower_host: "{{ awx_host }}"
-  register: awx_credentials
+  register: awx_credential_create
   ignore_errors: yes
-  with_items: "{{ awx_credentials }}"
+  with_items: 
+    - "{{ awx_credentials }}"
 
 # tower_credential failed with errors so had to switch to command line
 # fails with "Missing require fields: credential-type"
 
-- name: create crdentials using tower-cli
-  shell: "{{ lookup('template', 'awx_credentials.j2') }}"
+- name: create credentials using tower-cli
+  shell: "{{ lookup('template', 'awx_credential.j2') }}"
   # no_log: yes
-  register: awx_change_admin_password
+  register: awx_credential_shell
   ignore_errors: yes
   with_items: "{{ awx_credentials }}"
 
-- name: debug awx_change_admin_password
+- name: debug awx_create_credentials
   debug:
-    var: awx_change_admin_password
+    var: awx_credential_shell
