@@ -1,35 +1,29 @@
 ---
-
-- name: debug vars
-  debug:
-    var: item.type
-  with_items:
-    - "{{ awx_credentials }}"
-
-- name: configure credentials
-  tower_credential:
-    name: "{{ item.name }}"
-    description: "{{ item.description }}"
-    organization: "{{ item.organization }}"
-    state: "{{ item.state }}"
-    password: "{{ item.password }}"
-    kind: "{{ item.type }}"
-    # "{{ item.kind }}"
-    tower_username: "{{ awx_username }}"
-    tower_password: "{{ awx_password }}"
-    tower_verify_ssl: "{{ awx_verify_ssl }}"
-    tower_host: "{{ awx_host }}"
-  register: awx_credential_create
-  ignore_errors: yes
-  with_items: 
-    - "{{ awx_credentials }}"
+#- name: configure credentials
+#  tower_credential:
+#    name: "{{ item.name }}"
+#    description: "{{ item.description }}"
+#    organization: "{{ item.organization }}"
+#    state: "{{ item.state }}"
+#    password: "{{ item.password }}"
+#    kind: "ssh"
+#    tower_username: "{{ awx_username }}"
+#    tower_password: "{{ awx_password }}"
+#    tower_verify_ssl: "{{ awx_verify_ssl }}"
+#    tower_host: "{{ awx_host }}"
+#  register: awx_credential_create
+#  ignore_errors: yes
+#  with_items: "{{ awx_credentials }}"
 
 # tower_credential failed with errors so had to switch to command line
 # fails with "Missing require fields: credential-type"
 
+- name: set tower-cli config to avoid errors
+  shell: 'tower-cli config verify_ssl false'
+
 - name: create credentials using tower-cli
   shell: "{{ lookup('template', 'awx_credential.j2') }}"
-  # no_log: yes
+  no_log: yes
   register: awx_credential_shell
   ignore_errors: yes
   with_items: "{{ awx_credentials }}"

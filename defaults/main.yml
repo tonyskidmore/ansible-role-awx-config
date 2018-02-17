@@ -4,5 +4,5 @@ awx_password: D0ntPutH3r3
 awx_verify_ssl: no
 awx_host: http://localhost
 awx_credentials:
-  - { name: 'demoadmin', description: 'Demo admin account', organization: 'Default', state: 'present', password: 'D0ntPutH3r3', type: 'ssh' }
+  - { name: 'demorestuser', description: 'Demo admin account', organization: 'Default', state: 'present', password: 'D0ntPutH3r3', type: 'Machine' }
 
