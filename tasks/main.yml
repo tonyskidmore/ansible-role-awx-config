@@ -77,15 +77,11 @@
   with_items:
     - "{{ awx_templates }}"
 
-- name: debug results
-  debug:
-    var: item
-  ignore_errors: yes
-  with_items:
-    - "{{ awx_credential_shell }}"
-    - "{{ awx_project_shell }}"
-    - "{{ awx_user_shell }}"
-    - "{{ awx_inv_shell }}"
-    - "{{ awx_host_shell }}"
-    - "{{ awx_template_shell }}"
+- name: set combined fact
+  set_fact:
+    awx_user_combined: "{{ awx_user_username }}:{{ awx_user_password }}"
+
+- name: base64 encode combined fact
+  set_fact:
+     awx_base64_user_credential: "{{ awx_user_combined | b64encode }}"
 
