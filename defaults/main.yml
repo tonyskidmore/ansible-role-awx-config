@@ -14,7 +14,7 @@ awx_credentials:
 awx_projects:
   - { name: 'ansibledemoproject', description: 'Ansible demo project', organization: 'Default', scm_type: 'git', sc_url: "{{ awx_project_sc_url }}", options: '--wait' }
 awx_users:
-  - { username: "{{ awx_user_username }}", password: "{{ awx_user_password }}"', email: 'demorestuser@demo.local', options: '--is-superuser true' }
+  - { username: "{{ awx_user_username }}", password: "{{ awx_user_password }}", email: 'demorestuser@demo.local', options: '--is-superuser true' }
 awx_inventories:
   - { name: 'ansibledemoinventory', organization: 'Default', options: '' }
 awx_hosts:
