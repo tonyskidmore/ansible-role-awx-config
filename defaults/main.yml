@@ -3,8 +3,12 @@ awx_username: admin
 awx_password: D0ntPutH3r3
 awx_verify_ssl: no
 awx_host: http://localhost
+awx_credential_user: ansible_user
+awx_credential_password: D0ntPutH3r3
+
+
 awx_credentials:
-  - { name: 'ansibledemocred', description: 'Ansible demo credential', organization: 'Default', state: 'present', password: 'D0ntPutH3r3', type: 'Machine' }
+  - { name: 'ansibledemocred', description: 'Ansible demo credential', organization: 'Default', password: "{{ awx_credential_password }}", username: "{{ awx_credential_user }}", type: 'Machine' }
 awx_projects:
   - { name: 'ansibledemoproject', description: 'Ansible demo project', organization: 'Default', scm_type: 'git', sc_url: 'https://github.com/tonyskidmore/ansible-demo-user.git', options: '--wait' }
 awx_users:
@@ -13,3 +17,5 @@ awx_inventories:
   - { name: 'ansibledemoinventory', organization: 'Default', options: '' }
 awx_hosts:
   - { name: 'jumphost', inventory: 'ansibledemoinventory', options: '' }
+awx_templates:
+  - { name: 'ansibledemo', inventory: 'ansibledemoinventory', project: 'ansibledemoproject', playbook: 'site.yml', credential: 'ansibledemocred', options: '' }
