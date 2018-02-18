@@ -5,14 +5,16 @@ awx_verify_ssl: no
 awx_host: http://localhost
 awx_credential_user: ansible_user
 awx_credential_password: D0ntPutH3r3
-
+awx_project_sc_url: https://github.com/tonyskidmore/ansible-demo-user.git
+awx_user_username: demorestuser
+awx_user_password: D0ntPutH3r3
 
 awx_credentials:
   - { name: 'ansibledemocred', description: 'Ansible demo credential', organization: 'Default', password: "{{ awx_credential_password }}", username: "{{ awx_credential_user }}", type: 'Machine' }
 awx_projects:
-  - { name: 'ansibledemoproject', description: 'Ansible demo project', organization: 'Default', scm_type: 'git', sc_url: 'https://github.com/tonyskidmore/ansible-demo-user.git', options: '--wait' }
+  - { name: 'ansibledemoproject', description: 'Ansible demo project', organization: 'Default', scm_type: 'git', sc_url: "{{ awx_project_sc_url }}", options: '--wait' }
 awx_users:
-  - { username: 'demorestuser', password: 'D0ntPutH3r3', email: 'demorestuser@demo.local', options: '--is-superuser true' }
+  - { username: "{{ awx_user_username }}", password: "{{ awx_user_password }}"', email: 'demorestuser@demo.local', options: '--is-superuser true' }
 awx_inventories:
   - { name: 'ansibledemoinventory', organization: 'Default', options: '' }
 awx_hosts:
