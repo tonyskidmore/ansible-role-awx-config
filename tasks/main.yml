@@ -23,51 +23,47 @@
 
 - name: create credentials using tower-cli
   shell: "{{ lookup('template', 'awx-credential.j2') }}"
-  # no_log: yes
+  no_log: yes
   register: awx_credential_shell
   ignore_errors: yes
   with_items: "{{ awx_credentials }}"
 
 - name: create users using tower-cli
   shell: "{{ lookup('template', 'awx-user.j2') }}"
-  # no_log: yes
+  no_log: yes
   register: awx_user_shell
   ignore_errors: yes
   with_items: "{{ awx_users }}"
 
 - name: create projects using tower-cli
   shell: "{{ lookup('template', 'awx-project.j2') }}"
-  # no_log: yes
+  no_log: yes
   register: awx_project_shell
   ignore_errors: yes
-  # with_items: "{{ awx_projects }}"
   with_items:
     - "{{ awx_projects }}"
 
 - name: create inventories using tower-cli
   shell: "{{ lookup('template', 'awx-inventory.j2') }}"
-  # no_log: yes
+  no_log: yes
   register: awx_inv_shell
   ignore_errors: yes
-  # with_items: "{{ awx_projects }}"
   with_items:
     - "{{ awx_inventories }}"
 
 - name: create hosts using tower-cli
   shell: "{{ lookup('template', 'awx-host.j2') }}"
-  # no_log: yes
+  no_log: yes
   register: awx_host_shell
   ignore_errors: yes
-  # with_items: "{{ awx_projects }}"
   with_items:
     - "{{ awx_hosts }}"
 
 - name: create templates using tower-cli
   shell: "{{ lookup('template', 'awx-template.j2') }}"
-  # no_log: yes
+  no_log: yes
   register: awx_template_shell
   ignore_errors: yes
-  # with_items: "{{ awx_projects }}"
   with_items:
     - "{{ awx_templates }}"
 
