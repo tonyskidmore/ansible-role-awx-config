@@ -10,20 +10,19 @@ awx_user_username: demorestuser
 awx_user_password: D0ntPutH3r3
 awx_survey_enabled: True
 awx_survey_spec:
-- description:
-  name:
+  description: "demo survey description"
+  name: "demo survey"
   spec:
-    - required: "true"
-      min: "0"
-      default: "null"
-      max: "1024"
+    - required: true
+      min: 0
+      default: ""
+      max: 1024
       question_description: "question description"
-      choices: "null"
+      choices: ""
       new_question: "true"
       variable: "demo_user"
       question_name: "enter user"
       type: "text"
-
 
 awx_credentials:
   - { name: 'ansibledemocred', description: 'Ansible demo credential', organization: 'Default', password: "{{ awx_credential_password }}", username: "{{ awx_credential_user }}", type: 'Machine' }
