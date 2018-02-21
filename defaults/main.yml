@@ -20,4 +20,4 @@ awx_inventories:
 awx_hosts:
   - { name: 'jumphost', inventory: 'ansibledemoinventory', options: '' }
 awx_templates:
-  - { name: 'ansibledemo', inventory: 'ansibledemoinventory', project: 'ansibledemoproject', playbook: 'site.yml', credential: 'ansibledemocred', options: '' }
+  - { name: 'ansibledemo', inventory: 'ansibledemoinventory', project: 'ansibledemoproject', playbook: 'site.yml', credential: 'ansibledemocred', options: '--survey-enabled true --survey-spec  variable=jumphost_user,type=text' }
