@@ -36,4 +36,4 @@ awx_inventories:
 awx_hosts:
   - { name: 'jumphost', inventory: 'ansibledemoinventory', options: '' }
 awx_templates:
-  - { name: 'ansibledemo', inventory: 'ansibledemoinventory', project: 'ansibledemoproject', playbook: 'site.yml', credential: 'ansibledemocred', options: '', survey_enabled: "{{ }}", survey_spec: "{{ awx_survey_spec }}" }
+  - { name: 'ansibledemo', inventory: 'ansibledemoinventory', project: 'ansibledemoproject', playbook: 'site.yml', credential: 'ansibledemocred', options: '', survey_enabled: "{{ awx_survey_enabled }}", survey_spec: "{{ awx_survey_spec }}" }
